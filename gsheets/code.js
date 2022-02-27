@@ -15,10 +15,10 @@ https://www.youtube.com/channel/UCj9stNGVvQJspYMp8-lG_ng
 var gsheets = class Gsheets {
 
     constructor(sheet_id) {
-        if (typeof sheet_id != "string"){
-          throw {
-            "message": "sheet id harus string"
-          };
+        if (typeof sheet_id != "string") {
+            throw {
+                "message": "sheet id harus string"
+            };
         }
         if (!sheet_id) {
             return "Sheet id is required Please Read My docs, example \"1KAxctBF3qT8OiZXeA34eFYPYCft22e32e\"";
@@ -32,24 +32,24 @@ var gsheets = class Gsheets {
         }
         return Sheets.Spreadsheets.Values.get(this.sheet_id, String(range_name)).values;
     }
-    
+
     getUserRow(range_name, user_data) {
         if (!range_name) {
             return "range name is required example \"Sheet!A2:Z\"";
         }
-        
+
         if (!user_data) {
             return "Usee data is required Please Read My docs, example msg.from.id";
         }
-        
+
         var data = Sheets.Spreadsheets.Values.get(this.sheet_id, range_name).values;
         if (!data) {
             return false;
         } else {
             for (var row = 0; row < data.length; row++) {
-                var pola = new RegExp("^"+user_data+"$", "i");
+                var pola = new RegExp("^" + user_data + "$", "i");
                 if (pola.exec(data[row][0])) {
-                    return row+2;
+                    return row + 2;
                 }
             }
             return false;
@@ -57,11 +57,11 @@ var gsheets = class Gsheets {
     }
 
     save(range_name, user_data, array_save, array_update, range_name_update) {
-        
+
         if (!range_name) {
             return "range name is required example \"Sheet!A2:Z\"";
         }
-        
+
         if (!user_data) {
             return "User data is required Please Read My docs, example msg.from.id";
         }
@@ -86,7 +86,7 @@ var gsheets = class Gsheets {
             var datauser = [
                 array_update
             ];
-            var rangeName = range_name_update.replace(/(:.*)/ig,"")+rownum+":"+range_name_update.replace(/(.*:)/ig,"")+rownum;
+            var rangeName = range_name_update.replace(/(:.*)/ig, "") + rownum + ":" + range_name_update.replace(/(.*:)/ig, "") + rownum;
             var valueRange = Sheets.newValueRange();
             valueRange.values = datauser;
             var result = Sheets.Spreadsheets.Values.update(valueRange, this.sheet_id, rangeName, { valueInputOption: 'USER_ENTERED' });
@@ -108,7 +108,7 @@ var gsheets = class Gsheets {
             return 0;
         } else {
             for (var row = 0; row < data.length; row++) {
-                var pola = new RegExp("^"+user_data+"$", "i");
+                var pola = new RegExp("^" + user_data + "$", "i");
                 if (pola.exec(data[row][get_row_num])) {
                     return Number(data[row][return_row_num]);
                 }
@@ -120,7 +120,7 @@ var gsheets = class Gsheets {
         if (!this.sheet_id) {
             return "Sheet id is required Please Read My docs, example \"1KAxctBF3qT8OiZXeA34eFYPYCft22e32e\"";
         }
-        
+
         if (!range_name) {
             return "range name is required example \"Sheet!A2:Z\"";
         }
@@ -133,9 +133,9 @@ var gsheets = class Gsheets {
         } else {
             var x = 0;
             for (var row = 0; row < users.length; row++) {
-                var pola = new RegExp("^"+user_data+"$", "i");
+                var pola = new RegExp("^" + user_data + "$", "i");
                 if (pola.exec(users[row][get_row_num])) {
-                    x = x+1;
+                    x = x + 1;
                 }
             }
             return x;
@@ -164,7 +164,7 @@ var gsheets = class Gsheets {
             return false;
         } else {
             for (var row = 0; row < data.length; row++) {
-                var pola = new RegExp("^"+user_data+"$", "i");
+                var pola = new RegExp("^" + user_data + "$", "i");
                 if (pola.exec(data[row][get_row_num])) {
                     var hasil = data[row][return_row_num];
                     return hasil;
@@ -188,10 +188,10 @@ var gsheets = class Gsheets {
             return false;
         } else {
             for (var row = 0; row < data.length; row++) {
-                var pola = new RegExp("^"+user_data+"$", "i");
+                var pola = new RegExp("^" + user_data + "$", "i");
                 if (pola.exec(data[row][get_row_num])) {
                     var hasil = data[row];
-                    return {...hasil};
+                    return { ...hasil };
                 }
             }
             return false;
@@ -218,13 +218,13 @@ var gsheets = class Gsheets {
         if (!data) {
         } else {
             for (var row = 0; row < data.length; row++) {
-                var pola = new RegExp("^"+user_data+"$", "i");
+                var pola = new RegExp("^" + user_data + "$", "i");
                 if (pola.exec(data[row][get_row_num])) {
-                    var rownum = row+2;
+                    var rownum = row + 2;
                     var datauser = [
                         [new_data]
                     ];
-                    var rangeName = range_name0+rownum;
+                    var rangeName = range_name0 + rownum;
                     var valueRange = Sheets.newValueRange();
                     valueRange.values = datauser;
                     var result = Sheets.Spreadsheets.Values.update(valueRange, this.sheet_id, rangeName, { valueInputOption: 'USER_ENTERED' });
@@ -254,16 +254,16 @@ var gsheets = class Gsheets {
         }
         var data = Sheets.Spreadsheets.Values.get(this.sheet_id, range_name).values;
         if (!data) {
-          
+
         } else {
             for (var row = 0; row < data.length; row++) {
-                var pola = new RegExp("^"+user_data+"$", "i");
+                var pola = new RegExp("^" + user_data + "$", "i");
                 if (pola.exec(data[row][get_row_num])) {
-                    var rownum = row+2;
+                    var rownum = row + 2;
                     var datauser = [
                         new_data_array
                     ];
-                    var rangeName = range_name_update+rownum+":"+range_name_update0+rownum;
+                    var rangeName = range_name_update + rownum + ":" + range_name_update0 + rownum;
                     var valueRange = Sheets.newValueRange();
                     valueRange.values = datauser;
                     var result = Sheets.Spreadsheets.Values.update(valueRange, this.sheet_id, rangeName, { valueInputOption: 'USER_ENTERED' });
@@ -272,38 +272,6 @@ var gsheets = class Gsheets {
         }
     }
 
-
-    
-    checkadmin(range_name, user_data, get_row_num, return_row_num, user_id) {
-        if (!this.sheet_id) {
-            return "Sheet id is required Please Read My docs, example \"1KAxctBF3qT8OiZXeA34eFYPYCft22e32e\"";
-        }
-        if (!range_name) {
-            return "range name is required example \"Sheet!A2:Z\"";
-        }
-        if (!user_data) {
-            return "user_data is required Please Read My docs, example msg.from.id";
-        }
-        if (!user_id) {
-            return "user_id is required Please Read My docs, example msg.from.id";
-        }
-        var ambildata =  this.getRow(range_name, user_data, get_row_num, return_row_num) ;
-        var result = parse(ambildata).result;
-        var data = [
-        ];
-        try {
-            for (var row = 0; row < result.length; row++) {
-                data.push(result[row].user.id);
-            }
-            if (data.indexOf(user_id) > -1) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (e) {
-            return false;
-        }
-    }
 
 }
 

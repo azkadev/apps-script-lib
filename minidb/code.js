@@ -18,7 +18,7 @@ var minidb = class Minidb {
             this.db = PropertiesService.getDocumentProperties();
         }
     }
-    getValue(key) {
+    getValue(key, default_value = undefined) {
         try {
             var getData = this.db.getProperty(key);
             if (getData) {
@@ -28,13 +28,17 @@ var minidb = class Minidb {
                     return getData;
                 }
             }
-            return getData;
+            return default_value;
         } catch (e) {
-            return false;
+            return default_value;
         }
     }
-    getValues() {
-        return this.db.getProperties();
+    getValues(default_value = undefined) {
+        var values = this.db.getProperties();
+        if (values){
+            return values;
+        }
+        return default_value;
     }
     setValue(key, value) {
         if (typeof value == "object"){
